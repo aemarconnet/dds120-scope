@@ -1,0 +1,68 @@
+DDS-120 Scope - License Terms
+
+These terms apply to DDS-120 Scope ("the app"), oscilloscope software for the SainSmart DDS-120
+USB oscilloscope, published by MARCONNET TECHNOLOGIES LLC ("the publisher"). By installing or using the app
+you accept these terms.
+
+1. PUBLIC DOMAIN DEDICATION
+To the extent possible under law, the publisher has waived all copyright and related or
+neighboring rights to the app's own code, images and documentation under Creative Commons CC0
+1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/). You may use, copy, modify
+and distribute them for any purpose, including commercial purposes, without asking permission.
+The full CC0 text is installed with the app as LICENSE.txt. Section 2 describes the one part of
+the app that this dedication does not cover.
+
+2. SCOPE FIRMWARE (GPL)
+The app contains firmware that it loads into the oscilloscope each time it connects: the
+SainSmart DDS120 firmware of the OpenHantek6022 project (https://github.com/OpenHantek/OpenHantek6022),
+derived from sigrok-firmware-fx2lafw (https://sigrok.org). The firmware is licensed under the
+GNU General Public License, version 2 or (at your option) any later version, not under section 1.
+On Windows the app patches it while loading it so that Windows keeps the scope's built-in
+driver; FIRMWARE-LICENSE.txt, installed with the app, describes the patch. The GPL text is
+installed with the app as GPL-2.0.txt.
+For three years after you received the app, the publisher will give you, on request and for no
+more than the cost of making the copy, the complete corresponding source code of the firmware as
+distributed in the app, including the patch. Ask through the support contact on the app's
+Microsoft Store page. Nothing in these terms limits the rights the GPL gives you to the firmware.
+
+3. YOUR SCOPE
+The app writes the firmware only to the oscilloscope's working memory (RAM). It never writes
+the scope's permanent memory (EEPROM). Unplugging the scope returns it to its factory state.
+
+4. ELECTRICAL SAFETY
+The DDS-120 is a low-voltage, USB-powered instrument whose ground is connected to your
+computer's ground. Never connect it to mains voltage or to any circuit beyond the input
+ratings of the scope and its probes. Incorrect connections can damage the scope, your
+computer and the circuit under test, and can cause injury. You use the scope and the app at
+your own risk.
+
+5. ACCURACY
+Readings depend on the scope's hardware and calibration and may be inaccurate. Do not use the
+app for safety-critical, medical, legal-metrology or similar purposes.
+
+6. NO WARRANTY
+THE APP IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY
+AND NON-INFRINGEMENT. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE APP IS WITH YOU.
+
+7. LIMITATION OF LIABILITY
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL THE PUBLISHER BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES, INCLUDING DAMAGE TO
+EQUIPMENT, LOSS OF DATA OR LOSS OF PROFITS, ARISING OUT OF OR IN CONNECTION WITH THE APP OR ITS
+USE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Some jurisdictions do not allow these
+exclusions or limitations, so they may not apply to you; in that case the publisher's
+liability is limited to the greatest extent the law allows.
+
+8. PRIVACY
+The app does not collect, store or transmit personal information and makes no network
+connections. Its settings are stored only on your device.
+
+9. TRADEMARKS
+SainSmart and DDS-120 are trademarks of their respective owners. The app is an independent
+project. It is not made, endorsed or supported by SainSmart, the OpenHantek6022 project or
+the sigrok project. Section 1 does not grant any trademark rights.
+
+10. GENERAL
+These terms are between you and the publisher; Microsoft is not a party to them. If any part
+of these terms is held unenforceable, the rest remains in effect. Where the law of your
+country gives you rights that these terms cannot change, those rights are not affected.

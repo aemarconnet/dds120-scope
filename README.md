@@ -23,6 +23,20 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 Needs the .NET SDK (any recent version) and the .NET Framework 4.8 targeting pack (installed with
 Visual Studio). The output is `dist\DDS120Scope\` and `dist\DDS120Scope-portable.zip`.
 
+### Microsoft Store package (MSIX)
+
+```powershell
+powershell -ExecutionPolicy Bypass -File packaging\msix\build-msix.ps1
+```
+
+Builds the app and `dist\msix\DDS120Scope-<version>.msix` (unsigned: the Store signs it), plus
+the Store images in `dist\store\`. The package identity comes from `packaging\msix\store.json`;
+until it holds the values from Partner Center the script builds a `-localtest` package instead.
+Needs `makeappx`/`makepri` from the Windows SDK or Visual Studio's
+`Microsoft.Windows.SDK.BuildTools` package. Everything for the Store listing (texts, keywords,
+certification notes, EULA, privacy statement) is in `packaging\store\`, see
+[STORE-LISTING.md](packaging/store/STORE-LISTING.md).
+
 ## Layout
 
 | Path | What |
@@ -90,3 +104,12 @@ caches its vendor code (`0x01`) per VID/PID/revision. The patch in
    code (fx2lib would treat bRequest 1 as CLEAR_FEATURE).
 
 The patch verifies the original bytes first and is refused for any other firmware build.
+
+## License
+
+The project's own code, images and documentation are dedicated to the public domain under
+[CC0 1.0](LICENSE). The exception is `firmware/dds120-firmware.hex` (OpenHantek6022, derived from
+sigrok-firmware-fx2lafw), which stays under the GNU GPL version 2 or later: see
+[FIRMWARE-LICENSE.txt](packaging/FIRMWARE-LICENSE.txt) and [GPL-2.0.txt](packaging/GPL-2.0.txt).
+Both builds ship those files, and the end-user terms are in
+[packaging/store/EULA.txt](packaging/store/EULA.txt).

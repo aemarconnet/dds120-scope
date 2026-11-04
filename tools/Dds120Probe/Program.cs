@@ -19,6 +19,8 @@ using Dds120.Usb;
 //        --ac            AC coupling (default DC)
 //        --cal <hz>      calibration output frequency
 //        --gain2 <g>     CH2 gain if different, --dump <file> writes the raw bytes
+//   Dds120Probe storeassets <dir> [<listing dir>]   MSIX images (names for makepri) and, optionally,
+//                                          the square logos for the Store listing
 //   Dds120Probe selftest [--hw]            run the acquisition engine (demo signal, or the scope with
 //                                          --hw) through autoset, measurements, acquire modes, math,
 //                                          FFT and trigger couplings, printing the results
@@ -39,6 +41,7 @@ internal static class Program
                 case "icon": return WriteIcon(args.Length > 1 ? args[1] : "app.ico");
                 case "patchdump": return PatchDump();
                 case "selftest": return SelfTest(!args.Contains("--hw"));
+                case "storeassets": return StoreAssets(args.Length > 1 ? args[1] : "Assets", args.Length > 2 ? args[2] : null);
                 default:
                     Console.Error.WriteLine("Unknown command " + cmd);
                     return 2;
@@ -148,6 +151,55 @@ internal static class Program
         }
         Console.WriteLine("Wrote " + path);
         return 0;
+    }
+
+    // The MSIX package images, named with the scale-/targetsize- qualifiers makepri indexes, plus
+    // square logos for the Store listing (opaque, as the Store asks for box art).
+    static int StoreAssets(string dir, string listingDir)
+    {
+        System.IO.Directory.CreateDirectory(dir);
+        foreach (int scale in new[] { 100, 125, 150, 200, 400 })
+        {
+            Func<int, int> px = v => (int)Math.Round(v * scale / 100.0);
+            SavePng(Tile(px(44), px(44), 1.0, null), dir, "Square44x44Logo.scale-" + scale);
+            SavePng(Tile(px(50), px(50), 1.0, null), dir, "StoreLogo.scale-" + scale);
+            SavePng(Tile(px(71), px(71), 0.75, null), dir, "SmallTile.scale-" + scale);
+            SavePng(Tile(px(150), px(150), 0.6, null), dir, "Square150x150Logo.scale-" + scale);
+            SavePng(Tile(px(310), px(150), 0.6, null), dir, "Wide310x150Logo.scale-" + scale);
+            SavePng(Tile(px(310), px(310), 0.5, null), dir, "LargeTile.scale-" + scale);
+        }
+        // taskbar, Start list and file icons pick an exact size; "unplated" ones sit on no tile colour
+        foreach (int t in new[] { 16, 20, 24, 30, 32, 36, 40, 48, 60, 64, 72, 80, 96, 256 })
+            foreach (string form in new[] { "", "_altform-unplated", "_altform-lightunplated" })
+                SavePng(Tile(t, t, 1.0, null), dir, "Square44x44Logo.targetsize-" + t + form);
+        if (listingDir != null)
+        {
+            System.IO.Directory.CreateDirectory(listingDir);
+            foreach (int size in new[] { 300, 1080, 2160 })
+                SavePng(Tile(size, size, 0.72, Dds120.UI.Theme.Window), listingDir, "store-logo-" + size);
+        }
+        Console.WriteLine("Wrote images to " + dir + (listingDir != null ? " and " + listingDir : ""));
+        return 0;
+    }
+
+    static System.Drawing.Bitmap Tile(int w, int h, double iconFraction, System.Drawing.Color? background)
+    {
+        var bmp = new System.Drawing.Bitmap(w, h);
+        using (var g = System.Drawing.Graphics.FromImage(bmp))
+        {
+            if (background.HasValue)
+                g.Clear(background.Value);
+            int s = Math.Max(1, (int)Math.Round(Math.Min(w, h) * iconFraction));
+            using (var icon = Dds120.UI.AppIcon.Render(s))
+                g.DrawImage(icon, (w - s) / 2, (h - s) / 2, s, s);
+        }
+        return bmp;
+    }
+
+    static void SavePng(System.Drawing.Bitmap bmp, string dir, string name)
+    {
+        using (bmp)
+            bmp.Save(System.IO.Path.Combine(dir, name + ".png"), System.Drawing.Imaging.ImageFormat.Png);
     }
 
     // Issues the request Windows sends for the MS OS extended compat ID (vendor code 0x01, wIndex 4).

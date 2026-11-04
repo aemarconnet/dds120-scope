@@ -1,0 +1,7 @@
+{
+  "_help": "Copy these from Partner Center > your app > Product management > Product identity. While identityName is empty, build-msix.ps1 builds a local-test package that the Store will not accept.",
+  "displayName": "DDS-120 Scope",
+  "identityName": "",
+  "publisher": "",
+  "publisherDisplayName": ""
+}

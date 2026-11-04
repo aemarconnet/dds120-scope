@@ -20,6 +20,9 @@ Copy-Item (Join-Path $root 'src\DDS120Scope\bin\Release\net48\DDS120Scope.exe') 
 Copy-Item (Join-Path $root 'tools\Dds120Probe\bin\Release\net48\Dds120Probe.exe') (Join-Path $dist 'tools')
 Copy-Item (Join-Path $root 'packaging\README.txt') $dist
 Copy-Item (Join-Path $root 'packaging\FIRMWARE-LICENSE.txt') $dist
+Copy-Item (Join-Path $root 'packaging\GPL-2.0.txt') $dist
+Copy-Item (Join-Path $root 'packaging\store\EULA.txt') $dist
+Copy-Item (Join-Path $root 'LICENSE') (Join-Path $dist 'LICENSE.txt')
 
 $zip = Join-Path $root 'dist\DDS120Scope-portable.zip'
 if (Test-Path $zip) { Remove-Item -Force $zip }

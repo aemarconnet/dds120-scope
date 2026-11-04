@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Template: build-msix.ps1 fills in the $TOKENS$ from store.json and the project version. -->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap rescap">
+
+  <!-- The exe is AnyCPU .NET; x64 is the architecture the Store expects for a full-trust desktop
+       package, and Windows 11 on ARM installs x64 packages too. -->
+  <Identity Name="$IDENTITY_NAME$" Publisher="$PUBLISHER$" Version="$VERSION$" ProcessorArchitecture="x64" />
+
+  <Properties>
+    <DisplayName>$DISPLAY_NAME$</DisplayName>
+    <PublisherDisplayName>$PUBLISHER_DISPLAY_NAME$</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+    <Description>Oscilloscope software for the SainSmart DDS-120 USB oscilloscope.</Description>
+  </Properties>
+
+  <!-- .NET Framework 4.8 is part of Windows 10 1809 and later, so there are no dependencies. -->
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+
+  <Applications>
+    <Application Id="DDS120Scope" Executable="DDS120Scope.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="$DISPLAY_NAME$"
+        Description="Oscilloscope software for the SainSmart DDS-120 USB oscilloscope"
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png"
+          Square310x310Logo="Assets\LargeTile.png" ShortName="$DISPLAY_NAME$">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <!-- A desktop (WinForms) app; it reaches the scope through the in-box WinUSB driver. -->
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

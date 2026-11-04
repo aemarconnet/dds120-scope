@@ -281,7 +281,9 @@ namespace Dds120.UI
             UiKit.Wide(t, UiKit.Pair(csv, png));
             var logButton = UiKit.Button("Device log");
             logButton.Click += (s, e) => ShowLog();
-            UiKit.Wide(t, logButton);
+            var aboutButton = UiKit.Button("About");
+            aboutButton.Click += (s, e) => ShowAbout();
+            UiKit.Wide(t, UiKit.Pair(logButton, aboutButton));
             demoCheck = UiKit.Check("Demo signal (no hardware)");
             demoCheck.CheckedChanged += (s, e) =>
             {
@@ -771,6 +773,22 @@ namespace Dds120.UI
                     statusLabel.Text = "Saved screenshot to " + dlg.FileName;
                 }
             }
+        }
+
+        // The app ships GPL firmware, so the notice travels with it.
+        void ShowAbout()
+        {
+            string version = typeof(MainForm).Assembly.GetName().Version.ToString(3);
+            MessageBox.Show(this,
+                "DDS-120 Scope " + version + "\n\n" +
+                "Oscilloscope software for the SainSmart DDS-120 USB oscilloscope.\n\n" +
+                "The app's own code is dedicated to the public domain under CC0 1.0 (LICENSE.txt).\n\n" +
+                "On connect it loads the SainSmart DDS120 firmware of the OpenHantek6022 project, derived " +
+                "from sigrok-firmware-fx2lafw, into the scope's RAM (the EEPROM is never changed). That " +
+                "firmware is licensed under the GNU GPL, version 2 or later: see FIRMWARE-LICENSE.txt and " +
+                "GPL-2.0.txt next to the app.\n\n" +
+                "Not affiliated with SainSmart, OpenHantek6022 or sigrok.",
+                "About DDS-120 Scope", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         void ShowLog()
