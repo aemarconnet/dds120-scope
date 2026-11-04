@@ -781,7 +781,8 @@ namespace Dds120.UI
             string version = typeof(MainForm).Assembly.GetName().Version.ToString(3);
             MessageBox.Show(this,
                 "DDS-120 Scope " + version + "\n\n" +
-                "Oscilloscope software for the SainSmart DDS-120 USB oscilloscope.\n\n" +
+                "Oscilloscope software for the SainSmart DDS-120 USB oscilloscope.\n" +
+                "Published by MARCONNET TECHNOLOGIES LLC.\n\n" +
                 "The app's own code is dedicated to the public domain under CC0 1.0 (LICENSE.txt).\n\n" +
                 "On connect it loads the SainSmart DDS120 firmware of the OpenHantek6022 project, derived " +
                 "from sigrok-firmware-fx2lafw, into the scope's RAM (the EEPROM is never changed). That " +

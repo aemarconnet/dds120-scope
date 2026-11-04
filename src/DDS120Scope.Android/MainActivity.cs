@@ -937,7 +937,8 @@ namespace Dds120.Droid
         {
             string version = typeof(MainActivity).Assembly.GetName().Version.ToString(3);
             ShowMessage("DDS-120 Scope " + version,
-                "Oscilloscope app for the SainSmart DDS-120 over USB OTG.\n\n" +
+                "Oscilloscope app for the SainSmart DDS-120 over USB OTG.\n" +
+                "Published by MARCONNET TECHNOLOGIES LLC.\n\n" +
                 "The app's own code is dedicated to the public domain under CC0 1.0 " +
                 "(https://creativecommons.org/publicdomain/zero/1.0/).\n\n" +
                 "Scope firmware: on connect the app loads dds120-firmware.hex into the scope's RAM " +

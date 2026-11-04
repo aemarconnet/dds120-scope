@@ -13,11 +13,11 @@
     <!-- Not Dds120.Android: a Dds120.Android namespace would hide the global Android.* namespaces. -->
     <RootNamespace>Dds120.Droid</RootNamespace>
     <ApplicationId>com.dds120scope.app</ApplicationId>
-    <ApplicationVersion>2</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+    <ApplicationVersion>3</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.2</ApplicationDisplayVersion>
     <Product>DDS-120 Scope</Product>
     <Description>Oscilloscope app for the SainSmart DDS-120 over USB OTG</Description>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Copyright>App: own work. Scope firmware: sigrok/OpenHantek6022, GPL-2.0-or-later</Copyright>
 
     <!-- Android resources live in res\ (the Android name) instead of the .NET default Resources\. -->

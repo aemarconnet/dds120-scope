@@ -96,7 +96,7 @@ Requires a SainSmart DDS-120 USB oscilloscope for real measurements. DDS-120 Sco
 
 ### What's new in this version
 ```
-1.0.1: The demo signal now always starts off, and the app shows a clear message when no scope is connected, with a pointer to the demo signal. New About box with version and license information.
+The demo signal now always starts off, and the app shows a clear message when no scope is connected, with a pointer to the demo signal. New About box with version and license information.
 ```
 
 ### Product features (one per line, up to 20)
@@ -130,7 +130,7 @@ waveform
 
 ### Copyright and trademark info
 ```
-App code dedicated to the public domain (CC0 1.0). Scope firmware by the sigrok and OpenHantek6022 projects, GPL-2.0-or-later. SainSmart and DDS-120 are trademarks of their respective owners.
+Published by MARCONNET TECHNOLOGIES LLC. App code dedicated to the public domain (CC0 1.0). Scope firmware by the sigrok and OpenHantek6022 projects, GPL-2.0-or-later. SainSmart and DDS-120 are trademarks of their respective owners.
 ```
 
 ### Additional license terms
