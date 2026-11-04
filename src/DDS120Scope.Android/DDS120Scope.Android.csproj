@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Android version of the DDS-120 scope. The protocol, model tables, firmware loader and patch,
+       acquisition engine, measurements and demo source are the Windows app's Core sources, linked
+       in unchanged; only the USB layer and the UI are Android-specific. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>DDS120Scope.Android</AssemblyName>
+    <!-- Not Dds120.Android: a Dds120.Android namespace would hide the global Android.* namespaces. -->
+    <RootNamespace>Dds120.Droid</RootNamespace>
+    <ApplicationId>com.dds120scope.app</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
+    <Product>DDS-120 Scope</Product>
+    <Description>Oscilloscope app for the SainSmart DDS-120 over USB OTG</Description>
+    <Version>1.0.0</Version>
+    <Copyright>App: own work. Scope firmware: sigrok/OpenHantek6022, GPL-2.0-or-later</Copyright>
+
+    <!-- Android resources live in res\ (the Android name) instead of the .NET default Resources\. -->
+    <MonoAndroidResourcePrefix>res</MonoAndroidResourcePrefix>
+
+    <!-- A plain APK for sideloading (Release would default to an .aab for Google Play), signed with
+         the SDK's debug keystore, which the build creates on first use. -->
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <!-- Phones (64- and 32-bit ARM) and x64 emulators. -->
+    <RuntimeIdentifiers>android-arm64;android-arm;android-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Core/Scope/Dds120Device.cs is the WinUSB device. Usb/Dds120Device.cs replaces it with an
+         Android factory of the same name, so AcquisitionEngine compiles unchanged. The WinUSB files
+         compile (they are only P/Invoke declarations) but are never called. -->
+    <Compile Include="..\DDS120Scope\Core\**\*.cs"
+             Exclude="..\DDS120Scope\Core\Scope\Dds120Device.cs"
+             Link="Core\%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\firmware\dds120-firmware.hex" LogicalName="Dds120.Firmware.dds120-firmware.hex" />
+  </ItemGroup>
+
+</Project>

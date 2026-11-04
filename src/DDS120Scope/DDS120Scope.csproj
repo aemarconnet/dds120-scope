@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- .NET Framework 4.8 ships with Windows 10/11, so the exe runs anywhere with nothing installed. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+    <AssemblyName>DDS120Scope</AssemblyName>
+    <RootNamespace>Dds120</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <DebugType>none</DebugType>
+    <Product>DDS-120 Scope</Product>
+    <Description>Portable oscilloscope software for the SainSmart DDS-120</Description>
+    <Version>1.0.0</Version>
+    <Copyright>App: own work. Scope firmware: sigrok/OpenHantek6022, GPL-2.0-or-later</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\firmware\dds120-firmware.hex" LogicalName="Dds120.Firmware.dds120-firmware.hex" />
+  </ItemGroup>
+
+</Project>

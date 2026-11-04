@@ -1,0 +1,18 @@
+# Build output (build.ps1 recreates dist\)
+bin/
+obj/
+dist/
+
+# Settings a run copy writes next to the exe
+DDS120Scope.ini
+
+# Diagnostics output
+patched-firmware.bin
+dump_*.bin
+__pycache__/
+
+# Editor and tool state
+.vs/
+.idea/
+*.user
+.claude/

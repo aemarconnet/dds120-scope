@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="..\..\src\DDS120Scope\Core\**\*.cs" Link="Core\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="..\..\src\DDS120Scope\UI\AppIcon.cs;..\..\src\DDS120Scope\UI\Theme.cs" Link="UI\%(Filename)%(Extension)" />
+    <Reference Include="System.Drawing" />
+    <EmbeddedResource Include="..\..\firmware\dds120-firmware.hex" LogicalName="Dds120.Firmware.dds120-firmware.hex" />
+  </ItemGroup>
+
+</Project>

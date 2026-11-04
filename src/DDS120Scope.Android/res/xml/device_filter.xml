@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- USB IDs that start the app when plugged in (decimal, as Android requires). -->
+<resources>
+  <!-- 0x8102:0x8102  stock EEPROM firmware ("BUUDAI USB102"), before the upload -->
+  <usb-device vendor-id="33026" product-id="33026" />
+  <!-- 0x04B5:0x0120  open DDS120 scope firmware, after the upload re-enumerates the device -->
+  <usb-device vendor-id="1205" product-id="288" />
+</resources>

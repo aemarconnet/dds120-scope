@@ -1,0 +1,22 @@
+Scope firmware
+==============
+
+DDS120Scope.exe contains the file dds120-firmware.hex, which runs on the DDS-120's Cypress
+FX2 microcontroller (not on the PC). It is the SainSmart DDS120 firmware published by the
+OpenHantek6022 project:
+
+  https://github.com/OpenHantek/OpenHantek6022  (openhantek/res/firmware/dds120-firmware.hex)
+
+It is derived from sigrok-firmware-fx2lafw (https://sigrok.org) and is licensed under the
+GNU General Public License, version 2 or later.
+
+When uploading, DDS120Scope modifies the image in memory so that Windows keeps using its
+built-in WinUSB driver:
+  - the USB device descriptor reports the scope's stock identity (VID 8102, PID 8102,
+    class 0, no serial number), and
+  - a 49-byte hook at 0x3A00 plus a 40-byte descriptor at 0x3B00 answer the Microsoft OS 1.0
+    "extended compat ID" request (vendor code 0x01) with the compatible ID "WINUSB".
+The complete patch, with the original byte sequences it checks, is in the source file
+Core/Scope/Dds120FirmwarePatch.cs of this project.
+
+The scope's own EEPROM firmware is never modified.
