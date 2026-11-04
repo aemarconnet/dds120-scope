@@ -80,8 +80,9 @@ namespace Dds120.Droid
             LoadStored();
             settings.Load(stored);
             calibration.Load(stored);
-            string v;
-            bool demo = stored.TryGetValue("demo", out v) && v == "1";
+            // The demo signal always starts off, so a missing scope is reported instead of hidden.
+            const bool demo = false;
+            stored.Remove("demo");
 
             AndroidUsb.Init(this);
             AndroidUsb.Log += OnUsbLog;
@@ -782,12 +783,10 @@ namespace Dds120.Droid
         void SetDemo(bool demo)
         {
             engine.SetDemo(demo);
-            stored["demo"] = demo ? "1" : "0";
             shownFrame = null;
             Renderer.Frame = null;
             SyncControls();
             view.Invalidate();
-            RequestSave();
         }
 
         void AddLog(string line)

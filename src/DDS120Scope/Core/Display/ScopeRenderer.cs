@@ -750,6 +750,11 @@ namespace Dds120.Display
 
         void DrawCenteredMessage(IScopeCanvas g)
         {
+            if (Status == AcqStatus.NoDevice)
+            {
+                DrawNoScope(g);
+                return;
+            }
             string text = Message ?? "";
             if (Status == AcqStatus.Waiting)
                 text = "Waiting for trigger...";
@@ -769,6 +774,42 @@ namespace Dds120.Display
             foreach (string line in lines)
             {
                 g.Text(line, (gridLeft + gridRight) / 2, y, FontKind.Sans, size, Palette.TextDim, TextAlign.Center);
+                y += lineH;
+            }
+        }
+
+        // The warning card while no scope is connected: what is wrong, what to do, and that the demo
+        // signal is there to try the app without one.
+        void DrawNoScope(IScopeCanvas g)
+        {
+            const string title = "No scope connected";
+            const string hint = "To try the app without one, turn on the demo signal in the Tools tab.";
+            float titleSize = Dp(17), size = Dp(14), pad = Dp(18), icon = Dp(30), lineH = size * 1.45f;
+            float width = Math.Min(GridWidth - Dp(32), Dp(560));
+            float textW = width - 2 * pad;
+            List<string> body = string.IsNullOrEmpty(Message) ? new List<string>() : Wrap(g, Message, FontKind.Sans, size, textW);
+            List<string> hints = Wrap(g, hint, FontKind.Sans, size, textW);
+            float height = pad + icon + Dp(12) + titleSize * 1.4f + Dp(6) + body.Count * lineH + Dp(10) + hints.Count * lineH + pad;
+            float cx = (gridLeft + gridRight) / 2, left = cx - width / 2, top = CenterY - height / 2;
+            g.FillRoundRect(left, top, left + width, top + height, Dp(10), Palette.WithAlpha(Palette.Panel, 245));
+
+            float iy = top + pad;
+            float[] tri = { cx, iy, cx + icon * 0.58f, iy + icon, cx - icon * 0.58f, iy + icon };
+            g.FillPolygon(tri, 6, Palette.Wait);
+            g.Text("!", cx, iy + icon * 0.62f, FontKind.SansBold, icon * 0.6f, Palette.Black, TextAlign.Center);
+
+            float y = iy + icon + Dp(12) + titleSize * 0.7f;
+            g.Text(title, cx, y, FontKind.SansBold, titleSize, Palette.Text, TextAlign.Center);
+            y += titleSize * 0.7f + Dp(6) + lineH / 2;
+            foreach (string line in body)
+            {
+                g.Text(line, cx, y, FontKind.Sans, size, Palette.Text, TextAlign.Center);
+                y += lineH;
+            }
+            y += Dp(10);
+            foreach (string line in hints)
+            {
+                g.Text(line, cx, y, FontKind.Sans, size, Palette.TextDim, TextAlign.Center);
                 y += lineH;
             }
         }

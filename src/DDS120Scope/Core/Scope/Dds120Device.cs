@@ -82,7 +82,8 @@ namespace Dds120.Scope
                     throw new DeviceNotReadyException("The DDS-120 is plugged in, but Windows has no working driver for it right now " +
                         "(Device Manager code " + nodes[0].Value + "; it may still hold firmware from an earlier session). " +
                         "Unplug the scope and plug it back in.");
-                throw new DeviceNotReadyException("No DDS-120 found. Plug the scope in (USB ID 8102:8102) and try again.");
+                throw new DeviceNotReadyException("Plug the SainSmart DDS-120 into a USB port. " +
+                    "It is detected automatically (USB ID 8102:8102).");
             }
 
             Exception lastError = null;
@@ -124,6 +125,10 @@ namespace Dds120.Scope
                 dev.Dispose();
                 return WaitForFirmware(keepStockIdentity, log, cancel);
             }
+            var usbError = lastError as UsbException;
+            if (usbError != null && (usbError.Win32Error == 5 || usbError.Win32Error == 32)) // access denied, sharing violation
+                throw new DeviceNotReadyException("The DDS-120 is open in another program, for example a second copy of " +
+                    "this app. Close that program and the scope connects automatically.");
             throw new DeviceNotReadyException("The DDS-120 is plugged in, but Windows has no working driver for it right now " +
                 "(it may still hold firmware from an earlier session). Unplug the scope and plug it back in." +
                 (lastError != null ? " [" + lastError.Message + "]" : ""));

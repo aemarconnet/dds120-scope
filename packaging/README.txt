@@ -60,7 +60,7 @@ that do not apply to the current choice are hidden.
   Zero calibration ........ disconnect both inputs first; measures the zero offset at every gain.
   Save CSV / Screenshot ... export the current capture (with the math waveform) or a PNG image.
   Demo signal ............. runs without hardware (simulated square and sine waves). Only offered
-                            while no scope is connected.
+                            while no scope is connected, and always off when the app starts.
 
 Sample rates: up to 30 MS/s with only CH1 on, 15 MS/s with both channels. Turning CH2 off
 gives CH1 the faster rate. Bandwidth is limited by the DDS-120's analog front end.

@@ -53,9 +53,9 @@ namespace Dds120.Scope
             {
                 if (!AndroidUsb.HasUsbHost)
                     throw new DeviceNotReadyException("This phone or tablet does not report USB host (OTG) support. " +
-                        "Some devices still work: connect the DDS-120 through an OTG adapter. Or turn on the demo signal.");
-                throw new DeviceNotReadyException("No DDS-120 found. Connect the scope through a USB OTG adapter " +
-                    "(USB ID 8102:8102), or turn on the demo signal.");
+                        "Some still work: connect the DDS-120 through an OTG adapter.");
+                throw new DeviceNotReadyException("Connect the SainSmart DDS-120 through a USB OTG adapter. " +
+                    "It is detected automatically (USB ID 8102:8102).");
             }
 
             bool waiting = false, denied = false;

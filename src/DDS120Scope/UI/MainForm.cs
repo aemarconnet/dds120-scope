@@ -56,7 +56,9 @@ namespace Dds120.UI
             settings.Load(stored);
             calibration.Load(stored);
             string v;
-            bool demo = stored.TryGetValue("demo", out v) && v == "1";
+            // The demo signal always starts off, so a missing scope is reported instead of hidden.
+            const bool demo = false;
+            stored.Remove("demo");
             bool keepStockId = !(stored.TryGetValue("usb.keepstockid", out v) && v == "0");
             int tab;
             if (!stored.TryGetValue("ui.tab", out v) || !int.TryParse(v, out tab) || tab < 0 || tab >= TabNames.Length)
@@ -285,10 +287,8 @@ namespace Dds120.UI
             {
                 if (syncing) return;
                 engine.SetDemo(demoCheck.Checked);
-                stored["demo"] = demoCheck.Checked ? "1" : "0";
                 shownFrame = null;
                 Renderer.Frame = null;
-                RequestSave();
             };
             UiKit.Wide(t, demoCheck);
 

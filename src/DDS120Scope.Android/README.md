@@ -66,7 +66,8 @@ If you tapped **Cancel**, tap the scope screen to be asked again, or replug the 
   - while pinching one axis, moving both fingers together drags the other axis;
   - double-tap to run or stop;
   - long-press for: trigger level here, trigger point here, time or level cursors here, Autoset.
-- The demo signal is only offered while no scope is connected; zero cal needs the inputs
+- The demo signal is only offered while no scope is connected and is always off when the app
+  starts; without a scope the screen says so and points to it. Zero cal needs the inputs
   disconnected; the device log has a **Copy** button.
 - Settings are saved on the phone. Capture pauses while the app is in the background.
 
